@@ -15,10 +15,10 @@ exports.getnews = async (req, res) => {
 // create /  post news
 exports.createNews = async (req, res) => {
   try {
-    const { title, content, image, author, createdAt, updatedAt } = req.body;
+    const { title, content,id_categories, image, author, createdAt, updatedAt } = req.body;
 
     // Menyimpan data ke dalam database
-    const inews = await News.create({ title, content, image, author, createdAt, updatedAt });
+    const inews = await News.create({ title, content,id_categories, image, author, createdAt, updatedAt });
 
     // Mengembalikan respon yang sukses dengan data yang baru dibuat
     res.status(201).json({
@@ -39,8 +39,8 @@ exports.createNews = async (req, res) => {
 // POST
 exports.createNews = async (req, res) => {
   try {
-    const { title, content, image, author, createdAt, updatedAt } = req.body;
-    const inews = await News.create({ title, content, image, author, createdAt, updatedAt });
+    const { title, content,id_categories, image, author, createdAt, updatedAt } = req.body;
+    const inews = await News.create({ title, content,id_categories, image, author, createdAt, updatedAt });
     res.status(201).json({
       message: 'Berhasil Insert',
       data: inews
@@ -60,9 +60,9 @@ exports.createNews = async (req, res) => {
 exports.udpatenews = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, content, image, author, createdAt, updatedAt } = req.body;
+    const { title, content, image,id_categories, author, createdAt, updatedAt } = req.body;
     const [update] = await News.update(
-      { title, content, image, author, createdAt, updatedAt },
+      { title, content, image,id_categories, author, createdAt, updatedAt },
       { where: { id } }
     )
     if (update) {
