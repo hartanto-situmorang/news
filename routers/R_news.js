@@ -11,5 +11,9 @@ router.post('/news',authMiddleware,C_news.createNews);
 router.put('/news/:id',authMiddleware,C_news.udpatenews);
 // Delete   berita
 router.delete('/news/:id',authMiddleware,C_news.deletedNews);
+// cari news
+router.post('/news/cari',C_news.carinews)
+// cari news
+router.post('/news/categori/:id',C_news.getbyid)
 
 module.exports =  router;

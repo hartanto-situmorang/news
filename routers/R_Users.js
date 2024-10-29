@@ -1,15 +1,17 @@
 const express  = require('express');
 const  router  = express.Router();
-const  C_news =  require('../controllers/C_news.js');
-const authMiddleware = require('../auth/middleware');
+const  C_users=  require('../controllers/C_user.js');
 
-// gET News
-router.get('/news',C_news.getnews);
+
+// gET users
+router.get('/users',C_users.getUsers);
 // PoST berita
-router.post('/news',authMiddleware,C_news.createNews);
+router.post('/users',C_users.createUsers);
 // udpaste berita
-router.put('/news/:id',authMiddleware,C_news.udpatenews);
+router.put('/users/:id',C_users.updateUsers);
 // Delete   berita
-router.delete('/news/:id',authMiddleware,C_news.deletedNews);
+router.delete('/users/:id',C_users.deleteUsers);
+// login
+router.post('/login', C_users.login);
 
 module.exports =  router;

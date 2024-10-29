@@ -1,23 +1,15 @@
 /**
  * @swagger
- * tags:
- *   - name: Bagian Categories
- *     description: Semua berkaitan dengan kategori
- */
-
-
-/**
- * @swagger
  * /api/categories:
  *   get:
- *     tags: [Bagian Categories]
+ *     tags: [All Users]
  *     summary: Mengambil semua kategori
  *     description: Mengembalikan daftar kategori
  *     responses:
  *       200:
  *         description: Respon berhasil
  *   post:
- *     tags: [Bagian Categories]
+ *     tags: [Role Admin]
  *     summary: Membuat kategori
  *     description: Menambahkan kategori baru ke dalam database
  *     requestBody:
@@ -36,7 +28,7 @@
  * 
  * /api/categories/{id}:
  *   put:
- *     tags: [Bagian Categories]
+ *     tags: [Role Admin]
  *     summary: Memperbarui kategori
  *     description: Memperbarui kategori yang ada di dalam database
  *     parameters:
@@ -60,7 +52,7 @@
  *       200:
  *         description: Kategori berhasil diperbarui
  *   delete:
- *     tags: [Bagian Categories]
+ *     tags: [Role Admin]
  *     summary: Menghapus kategori
  *     description: Menghapus kategori dari database
  *     parameters:
