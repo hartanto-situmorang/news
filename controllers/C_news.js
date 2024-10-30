@@ -1,15 +1,15 @@
 const { News } = require('../models');
-const { Categories } = require('../models');
 const { Op } = require('sequelize');
 
+// Get News
 exports.getnews = async (req, res) => {
   try {
-    const response = news.map(({ title,content,image,author,id_categories,createdAt}) => ({ title,content,image,author,id_categories,createdAt}));
-    res.status(200).json(response);
+    const news = await News.findAll();
+    res.status(200).json(news);
   } catch (error) {
     res.status(500).json({
       error: 'Gagal mengambil data news',
-      data: error
+      detail: error.errors ? error.errors.map(e => e.message) : error.message
     });
   }
 };
@@ -17,9 +17,9 @@ exports.getnews = async (req, res) => {
 // cari Berita by id
 exports.getbyid = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const news = await News.findAll({
-      id_categories : id
+      id_categories: id
     });
 
     res.status(200).json({
@@ -38,13 +38,13 @@ exports.carinews = async (req, res) => {
   try {
     const { search } = req.body;
     const whereConditions = search
-      ?{
+      ? {
         [Op.or]: [
           { title: { [Op.like]: `%${search}%` } },
           { content: { [Op.like]: `%${search}%` } }
         ]
       }
-      :{};
+      : {};
     const news = await News.findAll({
       where: whereConditions
     });

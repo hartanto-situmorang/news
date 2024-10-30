@@ -125,7 +125,7 @@
  *                 example: "admin1233"
  *               password:
  *                 type: string
- *                 example: "admin123"
+ *                 example: "admin1233"
  *     responses:
  *       200:
  *         description: Login berhasil, token akses diberikan

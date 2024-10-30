@@ -9,6 +9,8 @@
  *       200:
  *         description: Respon berhasil
  *   post:
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Role Admin]
  *     summary: Membuat kategori
  *     description: Menambahkan kategori baru ke dalam database
@@ -28,6 +30,8 @@
  * 
  * /api/categories/{id}:
  *   put:
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Role Admin]
  *     summary: Memperbarui kategori
  *     description: Memperbarui kategori yang ada di dalam database
@@ -52,6 +56,8 @@
  *       200:
  *         description: Kategori berhasil diperbarui
  *   delete:
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Role Admin]
  *     summary: Menghapus kategori
  *     description: Menghapus kategori dari database

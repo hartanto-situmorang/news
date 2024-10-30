@@ -1,10 +1,16 @@
 /**
  * @swagger
- * security:
- *   - bearerAuth: []
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
  * 
  * /api/news:
  *   post:
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Role Admin]
  *     summary: Membuat artikel berita
  *     description: Menambahkan artikel berita baru ke dalam database
@@ -29,15 +35,14 @@
  *                 example: "hartanto"
  *               createdAt:
  *                 type: string
- *                 format: date-time
  *                 example: "2024-10-29T04:44:25.000Z"
  *               updatedAt:
  *                 type: string
- *                 format: date-time
  *                 example: "2024-10-29T04:44:25.000Z"
  *     responses:
  *       201:
  *         description: Artikel berita berhasil dibuat
+ *
  *   get:
  *     tags: [All Users]
  *     summary: Mengambil semua berita
@@ -45,9 +50,11 @@
  *     responses:
  *       200:
  *         description: Respon berhasil
- * 
+ *
  * /api/news/{id}:
  *   put:
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Role Admin]
  *     summary: Memperbarui artikel berita
  *     description: Memperbarui artikel berita yang ada di dalam database
@@ -79,16 +86,17 @@
  *                 example: "hartanto"
  *               createdAt:
  *                 type: string
- *                 format: date-time
  *                 example: "2024-10-29T04:44:25.000Z"
  *               updatedAt:
  *                 type: string
- *                 format: date-time
  *                 example: "2024-10-29T04:44:25.000Z"
  *     responses:
  *       200:
  *         description: Artikel berita berhasil diperbarui
+ *
  *   delete:
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Role Admin]
  *     summary: Menghapus artikel berita
  *     description: Menghapus artikel berita dari database
@@ -102,7 +110,7 @@
  *     responses:
  *       204:
  *         description: Artikel berita berhasil dihapus
- * 
+ *
  * /api/news/cari:
  *   post:
  *     tags: [All Users]
