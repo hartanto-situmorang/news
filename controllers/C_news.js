@@ -141,6 +141,6 @@ exports.deletedNews = async (req, res) => {
       res.status(404).json({ error: 'News tidak ditemukan' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Gagal menghapus category' });
+    res.status(500).json({ error: 'Gagal menghapus Berita' });
   }
 };
