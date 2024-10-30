@@ -301,3 +301,7 @@ describe('Category Controller', () => {
     });
 
 });
+
+afterAll(done => {
+    server.close(done);
+});
