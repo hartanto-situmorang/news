@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const categoriesRoutes = require('./routers/R_categories.js');
+const categories = require('./routers/R_categories.js');
 const news = require('./routers/R_news.js')
 const users = require('./routers/R_Users.js')
 require('dotenv').config();
@@ -8,7 +8,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc')
 
 app.use(express.json());
-app.use('/api', categoriesRoutes);
+app.use('/api', categories);
 app.use('/api', news);
 app.use('/api', users);
 

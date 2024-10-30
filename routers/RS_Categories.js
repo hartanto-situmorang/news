@@ -8,26 +8,6 @@
  *     responses:
  *       200:
  *         description: Respon berhasil
- *   post:
- *     security:
- *       - bearerAuth: []
- *     tags: [Role Admin]
- *     summary: Membuat kategori
- *     description: Menambahkan kategori baru ke dalam database
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *                 example: "Nama Kategori"
- *     responses:
- *       201:
- *         description: Kategori berhasil dibuat
- * 
  * /api/categories/{id}:
  *   put:
  *     security:
@@ -51,7 +31,10 @@
  *             properties:
  *               name:
  *                 type: string
- *                 example: "Nama Kategori Baru"
+ *                 example: "SPORT"
+ *               description:
+ *                 type: string
+ *                 example: "Sport"
  *     responses:
  *       200:
  *         description: Kategori berhasil diperbarui

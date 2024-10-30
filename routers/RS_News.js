@@ -17,28 +17,31 @@
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               title:
- *                 type: string
- *                 example: "Judul Berita Baru"
- *               content:
- *                 type: string
- *                 example: "Konten berita yang baru"
- *               image:
- *                 type: string
- *                 example: "gambar.png"
- *               author:
- *                 type: string
- *                 example: "hartanto"
- *               createdAt:
- *                 type: string
- *                 example: "2024-10-29T04:44:25.000Z"
- *               updatedAt:
- *                 type: string
- *                 example: "2024-10-29T04:44:25.000Z"
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              title:
+ *                type: string
+ *                example: "Perkembangan Ekonomi Indonesia di Tengah Ketidakpastian Global"
+ *              content:
+ *                type: string
+ *                example: "Ekonomi Indonesia menunjukkan tren positif meskipun ada tantangan global. Pemerintah meluncurkan beberapa inisiatif untuk meningkatkan investasi lokal dan memperkuat sektor ekspor. Dalam wawancara terbaru, Menteri Keuangan menekankan pentingnya stabilitas ekonomi dan pertumbuhan yang inklusif."
+ *              image:
+ *                type: string
+ *                example: "ekonomi-indonesia.png"
+ *              id_categories:
+ *                type: string
+ *                example: "2"
+ *              author:
+ *                type: string
+ *                example: "Hartanto"
+ *              createdAt:
+ *                type: string
+ *                example: "2024-10-29T04:44:25.000Z"
+ *              updatedAt:
+ *                type: string
+ *                example: "2024-10-29T04:44:25.000Z"
  *     responses:
  *       201:
  *         description: Artikel berita berhasil dibuat
@@ -125,7 +128,7 @@
  *             properties:
  *               search:
  *                 type: string
- *                 example: "percobaan"
+ *                 example: "Indonesia"
  *     responses:
  *       200:
  *         description: Respon berhasil

@@ -1,4 +1,4 @@
-const { News } = require('../models');
+const { News, Categories } = require('../models');
 const { Op } = require('sequelize');
 
 // Get News
@@ -19,16 +19,21 @@ exports.getbyid = async (req, res) => {
   try {
     const { id } = req.params;
     const news = await News.findAll({
-      id_categories: id
+      where: { id_categories: id }
     });
 
+    if (news.length === 0) {
+      return res.status(404).json({ message: 'Tidak ada berita ditemukan untuk kategori tersebut' });
+    }
+
     res.status(200).json({
-      message: news,
+      message: 'Berita berhasil ditemukan',
+      data: news,
     });
   } catch (error) {
     res.status(500).json({
       error: 'Gagal mengambil data news',
-      data: error
+      details: error.message
     });
   }
 };
@@ -50,8 +55,8 @@ exports.carinews = async (req, res) => {
     });
 
     res.status(200).json({
-      message: news,
-      data: req.body
+      message: "Berita yang tersedia berdasarkan konten dan title",
+      data: news
     });
   } catch (error) {
     res.status(500).json({
@@ -65,34 +70,19 @@ exports.carinews = async (req, res) => {
 exports.createNews = async (req, res) => {
   try {
     const { title, content, id_categories, image, author, createdAt, updatedAt } = req.body;
-    // Menyimpan data ke dalam database
-    const inews = await News.create({ title, content, id_categories, image, author, createdAt, updatedAt });
 
-    // Mengembalikan respon yang sukses dengan data yang baru dibuat
-    res.status(201).json({
-      message: 'Berhasil Insert',
-      data: inews // Mengembalikan data yang baru saja dimasukkan
-    });
-  } catch (error) {
-    // Menangani error
-    res.status(500).json({
-      message: "Gagal insert data News",
-      error: error.message, // Menampilkan pesan error yang lebih jelas
-      data: req.body,
-    });
-  }
-};
+    const category = await Categories.findByPk(id_categories);
+    if (!category) {
+      return res.status(404).json({
+        message: 'Kategori belum ada',
+      });
+    }
 
-// POST
-exports.createNews = async (req, res) => {
-  try {
-    const { title, content, id_categories, image, author, createdAt, updatedAt } = req.body;
     const inews = await News.create({ title, content, id_categories, image, author, createdAt, updatedAt });
     res.status(201).json({
       message: 'Berhasil Insert',
       data: inews
     });
-
   } catch (error) {
     res.status(500).json({
       message: "Gagal insert data News",
@@ -102,11 +92,20 @@ exports.createNews = async (req, res) => {
   }
 };
 
+
 // udpate  / PUT
 exports.udpatenews = async (req, res) => {
   try {
     const { id } = req.params;
     const { title, content, image, id_categories, author, createdAt, updatedAt } = req.body;
+
+    const category = await Categories.findByPk(id_categories);
+    if (!category) {
+      return res.status(404).json({
+        message: 'Kategori belum ada',
+      });
+    }
+
     const [update] = await News.update(
       { title, content, image, id_categories, author, createdAt, updatedAt },
       { where: { id } }

@@ -1,4 +1,4 @@
-const { Categories } = require('../models');
+const { News, Categories } = require('../models');
 
 // GET
 exports.getCategories = async (req, res) => {
@@ -17,10 +17,10 @@ exports.getCategories = async (req, res) => {
 exports.createCategory = async (req, res) => {
   try {
     const { name, description } = req.body;
-    const newCategory = await Category.create({ name, description });
+    const newCategory = await Categories.create({ name, description });
     res.status(201).json(newCategory);
   } catch (error) {
-    res.status(500).json({ error: 'Gagal menambah category baru' });
+    res.status(500).json({ error: 'Gagal menambah kategori baru' });
   }
 };
 
@@ -39,10 +39,10 @@ exports.updateCategory = async (req, res) => {
       const updatedCategory = await Categories.findOne({ where: { id } });
       res.status(200).json(updatedCategory);
     } else {
-      res.status(404).json({ error: 'Category tidak ditemukan' });
+      res.status(404).json({ error: 'kategori tidak ditemukan' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Gagal mengedit category' });
+    res.status(500).json({ error: 'Gagal mengedit kategori' });
   }
 };
 
@@ -50,15 +50,22 @@ exports.updateCategory = async (req, res) => {
 exports.deleteCategory = async (req, res) => {
   try {
     const { id } = req.params;
+
+    // berita yang terkait
+    const newsCount = await News.count({ where: { id_categories: id } });
+    if (newsCount > 0) {
+      return res.status(400).json({ message: 'Berita dengan kategori tersebut masih tersedia' });
+    }
+
     const result = await Categories.destroy({ where: { id } });
     console.log(result);
 
     if (result) {
-      res.status(200).json({ message: 'Category berhasil dihapus' });
+      res.status(200).json({ message: 'Kategori berhasil dihapus' });
     } else {
-      res.status(404).json({ error: 'Category tidak ditemukan' });
+      res.status(404).json({ error: 'Kategori tidak ditemukan' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Gagal menghapus category' });
+    res.status(500).json({ error: 'Gagal menghapus Kategori' });
   }
 };

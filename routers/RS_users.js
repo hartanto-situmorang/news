@@ -2,24 +2,17 @@
  * @swagger
  * tags:
  *   - name: Bagian Akun
- *     description: Method menambahkan akun
+ *     description: Digunakan untuk membuat akun Admin untuk login
  *   - name: Role Admin
- *     description: Semua tindakan hanya dilakukan oleh admin
+ *     description: Semua tindakan hanya dilakukan oleh admin | * Login -> paste token kedalam Authorize
  *   - name: All Users
- *     description: Hak akses all user
+ *     description: ROLE users/visitors
  */
 /**
  * @swagger
  * /api/users:
- *   get:
- *     tags: [Bagian Akun]
- *     summary: Mengambil semua users
- *     description: Mengembalikan daftar data users
- *     responses:
- *       200:
- *         description: Respon berhasil
  *   post:
-*     tags: [Bagian Akun]
+ *     tags: [Bagian Akun]
  *     summary: Membuat data users
  *     description: Menambahkan data users baru ke dalam database
  *     requestBody:
@@ -50,6 +43,13 @@
  *     responses:
  *       201:
  *         description: Artikel users berhasil dibuat
+ *   get:
+ *     tags: [Bagian Akun]
+ *     summary: Melihat semua users
+ *     description: Mengembalikan daftar data users
+ *     responses:
+ *       200:
+ *         description: Respon berhasil
  * /api/users/{id}:
  *   put:
  *     tags: [Bagian Akun]
@@ -131,4 +131,28 @@
  *         description: Login berhasil, token akses diberikan
  *       401:
  *         description: Kredensial tidak valid
+ * /api/categories: 
+ *   post:
+ *     security:
+ *       - bearerAuth: []
+ *     tags: [Role Admin]
+ *     summary: Membuat kategori
+ *     description: Menambahkan kategori baru ke dalam database
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "SPORT"
+ *               description:
+ *                 type: string
+ *                 example: "Sport"
+ *     responses:
+ *       201:
+ *         description: Kategori berhasil dibuat
+ *  
  */
